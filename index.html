@@ -7,8 +7,8 @@
 <title>Voice FX – Live-Stimme</title>
 <style>
 :root{color-scheme:dark;--bg:#0b1020;--panel:#151d30;--line:#2a3650;--text:#f3f6fc;--muted:#aab6ca;--accent:#72d6c2;--btn:#26344e}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#101a2d,#090d18 65%);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh;padding:20px 14px calc(28px + env(safe-area-inset-bottom))}
-main{max-width:680px;margin:0 auto}h1{font-size:1.55rem;margin:4px 0 4px}p{margin:6px 0;color:var(--muted)}.sub{font-size:.94rem;margin-bottom:18px}.panel{background:rgba(21,29,48,.95);border:1px solid var(--line);border-radius:18px;padding:16px;margin:12px 0}.status{display:flex;align-items:center;gap:9px;font-size:.92rem;color:var(--muted);margin:10px 0 14px}.dot{width:10px;height:10px;border-radius:50%;background:#77839a;flex:none}.dot.on{background:#55e2a5;box-shadow:0 0 12px #55e2a577}.buttons{display:grid;grid-template-columns:1fr 1fr;gap:10px}.btn{border:0;border-radius:12px;background:var(--btn);color:var(--text);padding:14px 12px;font:inherit;font-weight:650;min-height:48px}.btn.primary{background:var(--accent);color:#09201d}.btn:disabled{opacity:.4}.presets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px}.preset{border:1px solid #35435e;background:#1a263c;color:var(--text);padding:12px 10px;border-radius:12px;text-align:left;font:inherit}.preset.active{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}.preset strong{display:block;font-size:.96rem}.preset small{color:var(--muted);display:block;margin-top:3px}.control{margin:18px 0 8px}.control-head{display:flex;justify-content:space-between;gap:12px;align-items:center}.control label{font-weight:600}.value{color:var(--accent);font-variant-numeric:tabular-nums}input[type=range]{width:100%;margin:14px 0 3px;accent-color:var(--accent);height:28px}.range-labels{display:flex;justify-content:space-between;font-size:.78rem;color:var(--muted)}.note{font-size:.86rem;line-height:1.5}.warn{border-left:3px solid #e6b45c;padding-left:11px}.meter{height:6px;background:#26344e;border-radius:9px;overflow:hidden;margin-top:10px}.meter span{display:block;width:0;height:100%;background:var(--accent);transition:width .08s}.footer{font-size:.82rem;color:#8d9ab0;margin:16px 3px}.hidden{display:none}@media(min-width:520px){.presets{grid-template-columns:repeat(3,minmax(0,1fr))}}
+*{box-sizing:border-box}html,body{margin:0;padding:0}body{background:linear-gradient(160deg,#101a2d,#090d18 65%);color:var(--text);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;min-height:100vh;padding:24px 16px 40px}
+main{max-width:680px;margin:0 auto}.panel{background:rgba(21,29,48,.95);border:1px solid var(--line);border-radius:18px;padding:18px 18px 16px;box-shadow:0 18px 40px rgba(0,0,0,.22);margin:18px 0}.status{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.02);color:var(--text)}.dot{width:10px;height:10px;border-radius:50%;background:#ef4444;display:inline-block;box-shadow:0 0 0 0 rgba(239,68,68,.7);transition:all .2s ease}.dot.on{background:#22c55e;box-shadow:0 0 0 6px rgba(34,197,94,.12)}h1{font-size:1.55rem;margin:4px 0 4px}p{margin:6px 0;color:var(--muted)}.sub{font-size:.94rem;margin-bottom:18px}.buttons{display:flex;gap:10px;flex-wrap:wrap}.btn{appearance:none;border:1px solid var(--line);background:var(--btn);color:var(--text);font:inherit;padding:12px 16px;border-radius:12px;cursor:pointer;transition:transform .15s ease,opacity .15s ease}.btn:hover{transform:translateY(-1px)}.btn.primary{background:linear-gradient(135deg,#4bc0c8,#72d6c2);color:#06131d;border:none;font-weight:700}.btn:disabled{opacity:.45;cursor:not-allowed}.meter{height:14px;border-radius:999px;background:rgba(255,255,255,.05);overflow:hidden;border:1px solid rgba(255,255,255,.08);margin-top:16px}.meter span{display:block;height:100%;width:0%;background:linear-gradient(90deg,#72d6c2,#6ea8ff,#a78bfa);border-radius:inherit;transition:width .08s linear}.note{font-size:.92rem;line-height:1.5}.warn{border-color:rgba(246,195,67,.4);background:rgba(124,58,237,.07)}strong{font-size:1rem}#presets{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin-top:12px}.preset{background:rgba(255,255,255,.02);border:1px solid var(--line);border-radius:12px;padding:12px 12px;color:var(--text);cursor:pointer;text-align:left;display:flex;flex-direction:column;gap:4px;transition:border-color .15s ease,transform .15s ease,background .15s ease}.preset strong{font-size:.95rem}.preset small{color:var(--muted)}.preset.active{background:rgba(114,214,194,.14);border-color:rgba(114,214,194,.7)}.control{margin-top:14px}.control-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}.control label{font-weight:600}.value{color:var(--accent);font-size:.85rem}.control input[type="range"]{width:100%;accent-color:var(--accent)}.footer{margin-top:18px;color:var(--muted);font-size:.82rem;line-height:1.5;text-align:center}
 </style>
 </head>
 <body>
@@ -34,95 +34,310 @@ main{max-width:680px;margin:0 auto}h1{font-size:1.55rem;margin:4px 0 4px}p{margi
 <button class="preset" data-preset="echo"><strong>Echo</strong><small>Kurzer Nachhall</small></button>
 <button class="preset" data-preset="distort"><strong>Verzerrt</strong><small>Starker Effekt</small></button>
 </div>
-<div class="control"><div class="control-head"><label for="pitch">Tonhöhe</label><span class="value" id="pitchVal">0 Halbtöne</span></div><input id="pitch" type="range" min="-12" max="12" value="0" step="1"><div class="range-labels"><span>−12 tief</span><span>Original</span><span>+12 hoch</span></div></div>
-<div class="control"><div class="control-head"><label for="mix">Effektstärke</label><span class="value" id="mixVal">60 %</span></div><input id="mix" type="range" min="0" max="100" value="60" step="5"><div class="range-labels"><span>Dezent</span><span>Stark</span></div></div>
-<div class="control"><div class="control-head"><label for="volume">Ausgabelautstärke</label><span class="value" id="volumeVal">70 %</span></div><input id="volume" type="range" min="0" max="100" value="70" step="5"><div class="range-labels"><span>Leise</span><span>Laut</span></div></div>
+<div class="control"><div class="control-head"><label for="pitch">Tonhöhe</label><span class="value" id="pitchVal">0 Halbtöne</span></div><input id="pitch" type="range" min="-12" max="12" value="0" step="1"></div>
+<div class="control"><div class="control-head"><label for="mix">Effektstärke</label><span class="value" id="mixVal">60 %</span></div><input id="mix" type="range" min="0" max="100" value="60" step="5"></div>
+<div class="control"><div class="control-head"><label for="volume">Ausgabelautstärke</label><span class="value" id="volumeVal">70 %</span></div><input id="volume" type="range" min="0" max="100" value="70" step="5"></div>
 </div>
-<div class="panel note warn"><strong>Wichtig</strong><p>Die Seite verarbeitet den Ton lokal im Browser und sendet ihn nicht an einen Server. Der Mikrofonzugriff funktioniert normalerweise nur über eine sichere Verbindung (HTTPS) oder localhost und nur nach Freigabe. Eine HTML-Datei direkt aus einem Dateimanager zu öffnen kann je nach Handy und Browser scheitern.</p><p>Die Tonhöhenverschiebung ist ein einfacher Echtzeit-Effekt und kann etwas künstlich klingen. Das ist keine professionelle Voice-Changer-Qualität. Für die Wiedergabe möglichst kabelgebundene oder latenzarme Kopfhörer nutzen.</p></div>
+<div class="panel note warn"><strong>Wichtig</strong><p>Die Seite verarbeitet den Ton lokal im Browser und sendet ihn nicht an einen Server. Der Mikrofonzugriff funktioniert normalerweise nur über HTTPS oder localhost.</p></div>
 <div class="footer">Keine Aufnahme oder Speicherung. Mikrofonzugriff endet beim Stoppen oder Schließen der Seite.</div>
 </main>
 <script>
 (() => {
- const $=id=>document.getElementById(id);
- let ctx=null,stream=null,source=null,processor=null,output=null,filter=null,shaper=null,osc=null,oscGain=null,modGain=null,tremolo=null,delay=null,feedback=null,wet=null,dry=null,master=null,analyser=null,raf=0;
- let current='normal';
- const pitch=$('pitch'),mix=$('mix'),volume=$('volume');
- const presets={
-  normal:{pitch:0,filter:18000,dist:0,robot:0,echo:0},
-  deep:{pitch:-5,filter:4500,dist:0,robot:0,echo:0},
-  high:{pitch:5,filter:9000,dist:0,robot:0,echo:0},
-  robot:{pitch:0,filter:7000,dist:12,robot:1,echo:0},
-  alien:{pitch:3,filter:6500,dist:18,robot:1,echo:.24},
-  telephone:{pitch:0,filter:3400,low:450,dist:0,robot:0,echo:0},
-  monster:{pitch:-8,filter:3000,dist:65,robot:0,echo:.08},
-  echo:{pitch:0,filter:14000,dist:0,robot:0,echo:.48},
-  distort:{pitch:0,filter:5000,dist:85,robot:0,echo:0}
- };
- function setStatus(text,on=false){$('status').textContent=text;$('dot').classList.toggle('on',on)}
- function makeCurve(amount){const n=44100,curve=new Float32Array(n),k=amount/100;for(let i=0;i<n;i++){let x=i*2/n-1;curve[i]=((1+8*k)*x)/(1+8*k*Math.abs(x));}return curve}
- function buildGraph(){
-  source=ctx.createMediaStreamSource(stream);processor=ctx.createScriptProcessor(2048,1,1);output=ctx.createGain();filter=ctx.createBiquadFilter();filter.type='lowpass';filter.frequency.value=18000;
-  shaper=ctx.createWaveShaper();shaper.oversample='2x';shaper.curve=makeCurve(0);
-  dry=ctx.createGain();wet=ctx.createGain();delay=ctx.createDelay(1);delay.delayTime.value=.22;feedback=ctx.createGain();feedback.gain.value=.18;
-  osc=ctx.createOscillator();osc.type='sine';osc.frequency.value=38;oscGain=ctx.createGain();oscGain.gain.value=1;modGain=ctx.createGain();modGain.gain.value=0;tremolo=ctx.createGain();tremolo.gain.value=1;
-  master=ctx.createGain();master.gain.value=.7;analyser=ctx.createAnalyser();analyser.fftSize=256;
-  // ScriptProcessor pitch shifter: two crossfaded moving delay taps.
-  const size=32768;let ring=new Float32Array(size),write=0,phase=0;const minDelay=256,range=4096;
+  const $ = id => document.getElementById(id);
+  let ctx = null, stream = null, source = null, processor = null, filter = null, shaper = null;
+  let dry = null, wet = null, delay = null, feedback = null, master = null, analyser = null;
+  let raf = 0;
+  let current = 'normal';
 
-processor.onaudioprocess = e => {
-    const inp = e.inputBuffer.getChannelData(0);
-    const out = e.outputBuffer.getChannelData(0);
-    const semi = Number(pitch.value);
-    const ratio = Math.pow(2, semi / 12);
+  const pitch = $('pitch');
+  const mix = $('mix');
+  const volume = $('volume');
 
-    // Positive Halbtöne: Delay verkürzen = Stimme höher.
-    // Negative Halbtöne: Delay verlängern = Stimme tiefer.
-    const step = semi > 0
-        ? -(ratio - 1) / range
-        : (1 - ratio) / range;
+  const presets = {
+    normal: { pitch: 0, filter: 18000, dist: 0, robot: 0, echo: 0 },
+    deep: { pitch: -5, filter: 4500, dist: 0, robot: 0, echo: 0 },
+    high: { pitch: 5, filter: 9000, dist: 0, robot: 0, echo: 0 },
+    robot: { pitch: 0, filter: 7000, dist: 12, robot: 1, echo: 0 },
+    alien: { pitch: 3, filter: 6500, dist: 18, robot: 1, echo: 0.24 },
+    telephone: { pitch: 0, filter: 3400, low: 450, dist: 0, robot: 0, echo: 0 },
+    monster: { pitch: -8, filter: 3000, dist: 65, robot: 0, echo: 0.08 },
+    echo: { pitch: 0, filter: 14000, dist: 0, robot: 0, echo: 0.48 },
+    distort: { pitch: 0, filter: 5000, dist: 85, robot: 0, echo: 0 }
+  };
 
-    for (let i = 0; i < inp.length; i++) {
-        ring[write] = inp[i];
+  function setStatus(text, on = false) {
+    $('status').textContent = text;
+    $('dot').classList.toggle('on', on);
+  }
+
+  function makeCurve(amount) {
+    const n = 44100;
+    const curve = new Float32Array(n);
+    const k = amount / 100;
+    for (let i = 0; i < n; i++) {
+      const x = (i / n) * 2 - 1;
+      curve[i] = ((1 + 8 * k) * x) / (1 + 8 * k * Math.abs(x));
+    }
+    return curve;
+  }
+
+  function updateLabels() {
+    $('pitchVal').textContent = `${Number(pitch.value)} Halbtöne`;
+    $('mixVal').textContent = `${Number(mix.value)} %`;
+    $('volumeVal').textContent = `${Number(volume.value)} %`;
+  }
+
+  function buildGraph() {
+    if (!ctx || !stream) return;
+
+    source = ctx.createMediaStreamSource(stream);
+    processor = ctx.createScriptProcessor(2048, 1, 1);
+    filter = ctx.createBiquadFilter();
+    filter.type = 'lowpass';
+    filter.frequency.value = 18000;
+
+    shaper = ctx.createWaveShaper();
+    shaper.oversample = '2x';
+    shaper.curve = makeCurve(0);
+
+    dry = ctx.createGain();
+    wet = ctx.createGain();
+    delay = ctx.createDelay(1.0);
+    delay.delayTime.value = 0.22;
+    feedback = ctx.createGain();
+    feedback.gain.value = 0.18;
+
+    master = ctx.createGain();
+    master.gain.value = Number(volume.value) / 100;
+
+    analyser = ctx.createAnalyser();
+    analyser.fftSize = 2048;
+
+    const size = 32768;
+    let ring = new Float32Array(size);
+    let write = 0;
+    let phase = 0;
+    const minDelay = 256;
+    const range = 4096;
+
+    processor.onaudioprocess = e => {
+      const input = e.inputBuffer.getChannelData(0);
+      const output = e.outputBuffer.getChannelData(0);
+      const semi = Number(pitch.value);
+      const ratio = Math.pow(2, semi / 12);
+      const step = semi > 0 ? -(ratio - 1) / range : (1 - ratio) / range;
+
+      for (let i = 0; i < input.length; i++) {
+        ring[write] = input[i];
 
         const p1 = phase;
         const p2 = (phase + 0.5) % 1;
 
         const d1 = minDelay + p1 * range;
         const d2 = minDelay + p2 * range;
-
         const a = 0.5 - 0.5 * Math.cos(2 * Math.PI * p1);
 
         const r1 = (write - Math.floor(d1) + size) % size;
         const r2 = (write - Math.floor(d2) + size) % size;
 
-        const shifted =
-            ring[r1] * (1 - a) + ring[r2] * a;
-
-        out[i] = semi === 0 ? inp[i] : shifted;
+        const shifted = ring[r1] * (1 - a) + ring[r2] * a;
+        output[i] = semi === 0 ? input[i] : shifted;
 
         write = (write + 1) % size;
 
         if (semi !== 0) {
-            phase += step;
-
-            if (phase >= 1) phase -= 1;
-            else if (phase < 0) phase += 1;
+          phase += step;
+          if (phase >= 1) phase -= 1;
+          else if (phase < 0) phase += 1;
         }
-    }
-};
+      }
+    };
 
- function applyPreset(name){current=name;const p=presets[name];pitch.value=p.pitch||0;filter.frequency.setTargetAtTime(p.filter||18000,ctx.currentTime,.04);if(p.low){filter.type='bandpass';filter.frequency.setTargetAtTime(1200,ctx.currentTime,.04);filter.Q.value=.8}else{filter.type='lowpass';filter.Q.value=.0001}
-  shaper.curve=makeCurve(p.dist||0);oscGain.gain.setTargetAtTime(1,ctx.currentTime,.03);
-  // Low-frequency amplitude modulation creates the robotic/alien texture.
-  modGain.gain.setTargetAtTime(p.robot?0.72:0,ctx.currentTime,.03);
-  wet.gain.setTargetAtTime(p.echo||0,ctx.currentTime,.05);dry.gain.setTargetAtTime(1-(p.echo||0)*.35,ctx.currentTime,.05);
-  document.querySelectorAll('.preset').forEach(b=>b.classList.toggle('active',b.dataset.preset===name));updateControls();
- }
- function updateControls(){if(!ctx)return;let m=Number(mix.value)/100;const p=presets[current];shaper.curve=makeCurve((p.dist||0)*m);wet.gain.setTargetAtTime((p.echo||0)*m,ctx.currentTime,.04);dry.gain.setTargetAtTime(1-((p.echo||0)*m)*.35,ctx.currentTime,.04);master.gain.setTargetAtTime(Number(volume.value)/100,ctx.currentTime,.04);$('pitchVal').textContent=(Number(pitch.value)>0?'+':'')+pitch.value+' Halbtöne';$('mixVal').textContent=mix.value+' %';$('volumeVal').textContent=volume.value+' %';}
- function meterLoop(){if(!analyser)return;const data=new Uint8Array(analyser.frequencyBinCount);const draw=()=>{if(!analyser)return;analyser.getByteTimeDomainData(data);let sum=0;for(let x of data){let v=(x-128)/128;sum+=v*v}let rms=Math.sqrt(sum/data.length);$('meter').style.width=Math.min(100,rms*260)+'%';raf=requestAnimationFrame(draw)};draw()}
- async function start(){try{if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('Dieser Browser erlaubt keinen Mikrofonzugriff. Öffne die Seite über HTTPS in einem aktuellen Browser.');stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false},video:false});ctx=new (window.AudioContext||window.webkitAudioContext)();await ctx.resume();buildGraph();$('start').disabled=true;$('stop').disabled=false;setStatus('Mikrofon aktiv – Effekt wird live ausgegeben',true)}catch(err){setStatus(err.message||'Mikrofon konnte nicht gestartet werden');stop(false)}}
- function stop(update=true){if(raf)cancelAnimationFrame(raf);analyser=null;if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}if(ctx){ctx.close().catch(()=>{});ctx=null}source=processor=output=filter=shaper=osc=oscGain=modGain=tremolo=delay=feedback=wet=dry=master=null;$('start').disabled=false;$('stop').disabled=true;$('meter').style.width='0';if(update)setStatus('Mikrofon gestoppt')}
- $('start').addEventListener('click',start);$('stop').addEventListener('click',()=>stop());document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>{current=b.dataset.preset;if(ctx)applyPreset(current);else{pitch.value=presets[current].pitch||0;document.querySelectorAll('.preset').forEach(x=>x.classList.toggle('active',x===b));$('pitchVal').textContent=(Number(pitch.value)>0?'+':'')+pitch.value+' Halbtöne'}}));[pitch,mix,volume].forEach(el=>el.addEventListener('input',()=>{if(el===pitch){$('pitchVal').textContent=(Number(pitch.value)>0?'+':'')+pitch.value+' Halbtöne'}if(ctx)updateControls();else{$('mixVal').textContent=mix.value+' %';$('volumeVal').textContent=volume.value+' %'}}));window.addEventListener('pagehide',()=>stop(false));
+    source.connect(processor);
+    processor.connect(filter);
+    filter.connect(shaper);
+    shaper.connect(dry);
+    shaper.connect(wet);
+
+    dry.connect(master);
+    wet.connect(delay);
+    delay.connect(feedback);
+    feedback.connect(delay);
+    delay.connect(master);
+
+    master.connect(ctx.destination);
+    master.connect(analyser);
+  }
+
+  function applyPreset(name) {
+    current = name;
+    const preset = presets[name] || presets.normal;
+
+    pitch.value = preset.pitch ?? 0;
+    filter && filter.frequency.setTargetAtTime(preset.filter || 18000, ctx.currentTime, 0.04);
+
+    if (preset.low) {
+      filter && (filter.type = 'bandpass');
+      filter && filter.frequency.setTargetAtTime(preset.low, ctx.currentTime, 0.04);
+    } else if (filter) {
+      filter.type = 'lowpass';
+      filter.frequency.setTargetAtTime(preset.filter || 18000, ctx.currentTime, 0.04);
+    }
+
+    shaper && (shaper.curve = makeCurve(preset.dist || 0));
+
+    if (wet && dry) {
+      const echo = preset.echo || 0;
+      wet.gain.setTargetAtTime(echo, ctx.currentTime, 0.05);
+      dry.gain.setTargetAtTime(1 - echo * 0.35, ctx.currentTime, 0.05);
+    }
+
+    document.querySelectorAll('.preset').forEach(button => {
+      button.classList.toggle('active', button.dataset.preset === name);
+    });
+
+    updateControls();
+  }
+
+  function updateControls() {
+    updateLabels();
+
+    if (!ctx || !master) return;
+
+    const mixAmount = Number(mix.value) / 100;
+    const preset = presets[current] || presets.normal;
+    const dist = (preset.dist || 0) * mixAmount;
+    const echo = (preset.echo || 0) * mixAmount;
+
+    shaper.curve = makeCurve(dist);
+    if (wet && dry) {
+      wet.gain.setTargetAtTime(echo, ctx.currentTime, 0.04);
+      dry.gain.setTargetAtTime(Math.max(0.05, 1 - echo * 0.45), ctx.currentTime, 0.05);
+    }
+    master.gain.setTargetAtTime(Number(volume.value) / 100, ctx.currentTime, 0.05);
+  }
+
+  function meterLoop() {
+    if (!analyser) return;
+    const data = new Uint8Array(analyser.fftSize);
+    const draw = () => {
+      if (!analyser) return;
+      analyser.getByteTimeDomainData(data);
+      let sum = 0;
+      for (let i = 0; i < data.length; i++) {
+        const v = (data[i] - 128) / 128;
+        sum += v * v;
+      }
+      const rms = Math.sqrt(sum / data.length);
+      const level = Math.min(100, Math.round(rms * 180 + 2));
+      $('meter').style.width = `${level}%`;
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+  }
+
+  async function start() {
+    try {
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error('Dieser Browser erlaubt keinen Mikrofonzugriff. Bitte ein moderner Browser verwenden.');
+      }
+
+      if (ctx) {
+        return;
+      }
+
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      stream = await navigator.mediaDevices.getUserMedia({
+        audio: {
+          echoCancellation: false,
+          noiseSuppression: false,
+          autoGainControl: false
+        },
+        video: false
+      });
+
+      buildGraph();
+      setStatus('Mikrofon läuft', true);
+      $('start').disabled = true;
+      $('stop').disabled = false;
+      applyPreset(current);
+      meterLoop();
+      await ctx.resume();
+    } catch (error) {
+      console.error(error);
+      setStatus(error.message || 'Mikrofon konnte nicht gestartet werden', false);
+      stop(false);
+    }
+  }
+
+  function stop(update = true) {
+    if (raf) cancelAnimationFrame(raf);
+    raf = 0;
+
+    if (stream) {
+      stream.getTracks().forEach(track => track.stop());
+      stream = null;
+    }
+
+    if (ctx) {
+      try {
+        ctx.close();
+      } catch (error) {
+        console.warn('AudioContext close warning:', error);
+      }
+      ctx = null;
+    }
+
+    source = null;
+    processor = null;
+    filter = null;
+    shaper = null;
+    dry = null;
+    wet = null;
+    delay = null;
+    feedback = null;
+    master = null;
+    analyser = null;
+
+    $('meter').style.width = '0%';
+    $('start').disabled = false;
+    $('stop').disabled = true;
+
+    if (update) {
+      setStatus('Mikrofon nicht gestartet', false);
+    }
+  }
+
+  pitch.addEventListener('input', () => {
+    updateLabels();
+    if (ctx) {
+      const v = Number(pitch.value);
+      if (processor && processor.onaudioprocess) {
+        // no-op; the processor reads pitch.value on each audio block
+      }
+    }
+  });
+
+  mix.addEventListener('input', updateControls);
+  volume.addEventListener('input', () => {
+    updateLabels();
+    if (master && ctx) {
+      master.gain.setTargetAtTime(Number(volume.value) / 100, ctx.currentTime, 0.05);
+    }
+  });
+
+  $('start').addEventListener('click', start);
+  $('stop').addEventListener('click', () => stop());
+
+  document.querySelectorAll('.preset').forEach(button => {
+    button.addEventListener('click', () => {
+      applyPreset(button.dataset.preset);
+    });
+  });
+
+  updateLabels();
+  applyPreset(current);
 })();
 </script>
-</body></html>
+</body>
+</html>
