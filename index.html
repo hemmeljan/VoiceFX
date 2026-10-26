@@ -68,10 +68,49 @@ main{max-width:680px;margin:0 auto}h1{font-size:1.55rem;margin:4px 0 4px}p{margi
   master=ctx.createGain();master.gain.value=.7;analyser=ctx.createAnalyser();analyser.fftSize=256;
   // ScriptProcessor pitch shifter: two crossfaded moving delay taps.
   const size=32768;let ring=new Float32Array(size),write=0,phase=0;const minDelay=256,range=4096;
-  processor.onaudioprocess=e=>{const inp=e.inputBuffer.getChannelData(0),out=e.outputBuffer.getChannelData(0);const semi=Number(pitch.value),ratio=Math.pow(2,semi/12),step=Math.abs(ratio-1)/range;for(let i=0;i<inp.length;i++){ring[write]=inp[i];let p1=phase,p2=(phase+.5)%1;let d1=minDelay+p1*range,d2=minDelay+p2*range;let a=0.5-0.5*Math.cos(2*Math.PI*p1),b=0.5-0.5*Math.cos(2*Math.PI*p2);let r1=(write-Math.floor(d1)+size)%size,r2=(write-Math.floor(d2)+size)%size;let s=ring[r1]*(1-a)+ring[r2]*a;out[i]=semi===0?inp[i]:s;write=(write+1)%size;if(semi!==0){phase+=step;if(phase>=1)phase-=1;}}};
-  source.connect(processor);processor.connect(filter);filter.connect(shaper);shaper.connect(tremolo);tremolo.connect(dry);dry.connect(master);tremolo.connect(delay);delay.connect(feedback);feedback.connect(delay);delay.connect(wet);wet.connect(master);master.connect(analyser);analyser.connect(ctx.destination);osc.connect(oscGain);oscGain.connect(modGain);modGain.connect(tremolo.gain);
-  osc.start();applyPreset(current);updateControls();meterLoop();
- }
+
+processor.onaudioprocess = e => {
+    const inp = e.inputBuffer.getChannelData(0);
+    const out = e.outputBuffer.getChannelData(0);
+    const semi = Number(pitch.value);
+    const ratio = Math.pow(2, semi / 12);
+
+    // Positive Halbtöne: Delay verkürzen = Stimme höher.
+    // Negative Halbtöne: Delay verlängern = Stimme tiefer.
+    const step = semi > 0
+        ? -(ratio - 1) / range
+        : (1 - ratio) / range;
+
+    for (let i = 0; i < inp.length; i++) {
+        ring[write] = inp[i];
+
+        const p1 = phase;
+        const p2 = (phase + 0.5) % 1;
+
+        const d1 = minDelay + p1 * range;
+        const d2 = minDelay + p2 * range;
+
+        const a = 0.5 - 0.5 * Math.cos(2 * Math.PI * p1);
+
+        const r1 = (write - Math.floor(d1) + size) % size;
+        const r2 = (write - Math.floor(d2) + size) % size;
+
+        const shifted =
+            ring[r1] * (1 - a) + ring[r2] * a;
+
+        out[i] = semi === 0 ? inp[i] : shifted;
+
+        write = (write + 1) % size;
+
+        if (semi !== 0) {
+            phase += step;
+
+            if (phase >= 1) phase -= 1;
+            else if (phase < 0) phase += 1;
+        }
+    }
+};
+
  function applyPreset(name){current=name;const p=presets[name];pitch.value=p.pitch||0;filter.frequency.setTargetAtTime(p.filter||18000,ctx.currentTime,.04);if(p.low){filter.type='bandpass';filter.frequency.setTargetAtTime(1200,ctx.currentTime,.04);filter.Q.value=.8}else{filter.type='lowpass';filter.Q.value=.0001}
   shaper.curve=makeCurve(p.dist||0);oscGain.gain.setTargetAtTime(1,ctx.currentTime,.03);
   // Low-frequency amplitude modulation creates the robotic/alien texture.
